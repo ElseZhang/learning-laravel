@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\SendEmail::class //注册任务类
     ];
 
     /**
@@ -24,6 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        //每分钟执行一次文件的写入
+        $schedule->command('email:send')
+            ->everyMinute();
         // $schedule->command('inspire')
         //          ->hourly();
     }
